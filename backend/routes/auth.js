@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router()
 const User = require('../model/User')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken')
+const fetchuser = require('../middleware/login')
 const { body,validationResult } = require('express-validator')
 
-const JWT_secret = "helloiamhimanshu"
+const JWT_secret = "helloiamhimanshu"   // this is used for signature
 
 
-//create a user using: post "/api/auth/createuser"
+//ROUTE:1 create a user using: post "/api/auth/createuser"
 router.post('/createuser',[
     body('name','Enter a valid name').isLength({min:3}),
     body('email','Enter a valid email').isEmail(),
@@ -55,13 +56,14 @@ router.post('/createuser',[
     
 })
 
-//delete a user using: post "/api/auth/deleteuser"
+//ROUTE:2 delete a user using: post "/api/auth/deleteuser"
 router.delete('/deleteuser',async (req,res)=>{
     const deluser = await User.deleteMany({})
     res.json(deluser)
     console.log("user deleted")
 })
-//authenticate  a user using: post "/api/auth/login", no login required
+
+// ROUTE:3 authenticate  a user using: post "/api/auth/login", no login required
 
 router.post('/login',[
     body('email','Enter a valid email').isEmail(),
@@ -72,6 +74,8 @@ router.post('/login',[
         return res.status(400).json({error:error.array()})
     }
     
+
+    //mattching the req.email with the with db email
     const {email,password} = req.body
     try{
         let user = await User.findOne({email})
@@ -79,9 +83,11 @@ router.post('/login',[
 
             return res.status(400).json({error:"please try to login with coreect credentials"})
         }
+
+        //compare the password with db password
         const passwordcompare = await bcrypt.compare(password,user.password)
         if(!passwordcompare){
-            return res.status(400).json({error:"please try to login with coreect credentials"})
+            return res.status(400).json({error:"please try to login with correct credentials"})
 
         }
         const data = {
@@ -89,6 +95,7 @@ router.post('/login',[
                 id:user.id
             }
         }
+        //This is a signature
         const authtoken = jwt.sign(data,JWT_secret)
         // console.log(authtoken)
         res.send({authtoken})
@@ -98,12 +105,20 @@ router.post('/login',[
         console.log(error.message)
         res.status(500).send("internal server error")
     }
-
-
-
-
 })
 
+//ROUTE:4 get loggedin user detail using:Post"api/auth/getuser". Login Required
+router.post('/getuser',fetchuser,async (req,res)=>{
+try {
+    const userId = req.user.id
+    const user = await User.findById(userId).select("-password")
+    res.json(user)
+    
+} catch(error){
+        console.log(error.message)
+        res.status(500).send("internal server error")
+    }
 
+})
 
 module.exports = router
