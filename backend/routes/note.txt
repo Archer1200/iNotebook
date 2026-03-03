@@ -1,0 +1,7 @@
+echo "# iNotebook" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/hk8381862115-bot/iNotebook.git
+git push -u origin main
