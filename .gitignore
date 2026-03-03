@@ -1,2 +1,4 @@
-nodemodule/
+node_modules/
+backend/node_modules/
+inotebook/node_modules/
 .env
