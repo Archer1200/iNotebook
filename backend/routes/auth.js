@@ -3,7 +3,7 @@ const router = express.Router()
 const User = require('../model/User')
 const bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken')
-const fetchuser = require('../middleware/login')
+const fetchuser = require('../middleware/fetchuser')
 const { body,validationResult } = require('express-validator')
 
 const JWT_secret = "helloiamhimanshu"   // this is used for signature
@@ -15,7 +15,7 @@ router.post('/createuser',[
     body('email','Enter a valid email').isEmail(),
     body('password','Password must be at least 5 characters').isLength({ min: 5 }),
 ],async (req,res)=>{
-    //if there are erroe, retun bad request and the error
+    //if there are error, retun bad request and the error
     const error = validationResult(req)
     if (!error.isEmpty()){
         return res.status(400).json({error:error.array()})

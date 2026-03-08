@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const fetchuser = require("../middleware/login");
-const Note = require("../model/Notes");
+
+const fetchuser = require("../middleware/fetchuser");
+const Notes = require("../model/Notes");
 const { body, validationResult } = require("express-validator");
-const { findByIdAndUpdate } = require("../model/User");
 
 //ROUTE 1 : GET ALL NOTES USING: GET "/api/auth/fetchallnotes" Login Required
 router.get("/fetchallnotes", fetchuser, async (req, res) => {
@@ -57,13 +57,6 @@ router.post(  "/addnotes",  fetchuser,[
    }
    
 })
-
-
-
-
-
-
-
 
   //ROUTE 3 : UPDATING EXISTING NOTES USING: Delete "/api/auth/updatenotes" Login Required
 
