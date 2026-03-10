@@ -4,7 +4,9 @@ import Notesitem from "./Notesitem";
 
 const Notes = () => {
   const context = useContext(noteContext);
-  const { notes, setnotes } = context;
+  const { notes, addNote } = context;
+
+
   return (
     <div className="row my-3">
       <h1>Your Notes</h1>
