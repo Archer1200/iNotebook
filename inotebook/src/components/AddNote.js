@@ -29,7 +29,7 @@ const AddNote = () => {
     <input type="text" className="form-control"  aria-describedby="emailHelp" id="title" name="title" onChange={onChange}/>
     </div>
   <div className="mb-3">
-    <label htmlFor="desc" className="form-label">Password</label>
+    <label htmlFor="desc" className="form-label">Description</label>
     <input type="text" className="form-control" id="description" name="description" onChange={onChange}/>
   </div>
   <div className="mb-3 form-check">

@@ -91,12 +91,27 @@ import NoteContext from './noteContext'
 
     // Delete a Note
     const deleteNote = (id)=>{
-        console.log("deleting the note with id" + id )
+                //Todo api call
 
+        console.log("deleting the note with id" + id )
+        const newNotes = notes.filter((note)=>(note._id!==id))
+        setnotes(newNotes)
     }
 
     //Edit a Note
-    const editNote = ()=>{
+    const editNote = (id,title,description,tag)=>{
+        // api call
+
+        // Logic to edit note
+        const editNote = (id,title,description,tag)
+        for (let index = 0; index = notes.length; index++) {
+            const element =notes[index]
+            if(element._id===id){
+                element.title = title
+                element.description = description
+                element.tag = tag
+            }
+        }
 
     }
 
