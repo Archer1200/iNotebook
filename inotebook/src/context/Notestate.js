@@ -1,126 +1,98 @@
 import { useState } from 'react'
 import NoteContext from './noteContext'
+import axios from "axios"
+
+const NoteState = (props)=>{
+
+const host = "http://localhost:5000"
+
+const notesInitial = []
+const [notes, setnotes] = useState(notesInitial)
 
 
-    const NoteState = (props)=>{
-    const notesInitial =[
-        
-    {
-        "_id": "69ac82ce60a66cfd8be1d26a",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title3",
-        "description": "plz wakeup early",
-        "tag": "personal",
-        "date": "1772913358918",
-        "__v": 0
-    },
-    {
-        "_id": "69ae6e9b7340ceddfa1c0ee5",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title1",
-        "description": "plz wakeup early",
-        "date": "1773039259482",
-        "__v": 0
-    },
-    {
-        "_id": "69ae6ea17340ceddfa1c0ee7",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title12",
-        "description": "plz wakeup early",
-        "date": "1773039265254",
-        "__v": 0
-    },
-    {
-        "_id": "69ae6ea17340ceddfa1c0e2e7",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title12",
-        "description": "plz wakeup early",
-        "date": "1773039265254",
-        "__v": 0
-    },
-    {
-        "_id": "69ae6ea17340ceddfa1c0e3e7",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title12",
-        "description": "plz wakeup early",
-        "date": "1773039265254",
-        "__v": 0
-    },
-    {
-        "_id": "69ae6ea17340ceddfa1c0e4e7",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title12",
-        "description": "plz wakeup early",
-        "date": "1773039265254",
-        "__v": 0
-    },
-    {
-        "_id": "69ae6ea17340ceddfa1c0e5e7",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title12",
-        "description": "plz wakeup early",
-        "date": "1773039265254",
-        "__v": 0
-    },
-    {
-        "_id": "69ae6ea17340ceddfa1c0e6e7",
-        "user": "69a73d053c8981cc51291734",
-        "title": "my title12",
-        "description": "plz wakeup early",
-        "date": "1773039265254",
-        "__v": 0
-    }
+// Get Notes
+const getNotes = async ()=>{
+    const response = await axios.get(`${host}/api/notes/fetchallnotes`,
+        {headers:{
+                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"}
+    })
+    setnotes(response.data)
+}
 
-    ]
-    const [notes, setnotes] = useState(notesInitial)
 
-    // Add a Note
-    const addNote = (title,description,tag)=>{
-        //Todo api call
-        console.log("Adding a new note")
-        const note = {
-        "_id": "69ae6ea17340ceddfa1c0e6e7",
-        "user": "69a73d053c8981cc51291734",
-        "title": title,
-        "description": description,
-        "date": "1773039265254",
-        "__v": 0
-    }
-        setnotes(notes.concat(note))
-    }
+// Add a Note
+const addNote = async (title,description,tag)=>{
+    console.log(typeof title, title)
+console.log(typeof description, description)
 
-    // Delete a Note
-    const deleteNote = (id)=>{
-                //Todo api call
-
-        console.log("deleting the note with id" + id )
-        const newNotes = notes.filter((note)=>(note._id!==id))
-        setnotes(newNotes)
-    }
-
-    //Edit a Note
-    const editNote = (id,title,description,tag)=>{
-        // api call
-
-        // Logic to edit note
-        const editNote = (id,title,description,tag)
-        for (let index = 0; index = notes.length; index++) {
-            const element =notes[index]
-            if(element._id===id){
-                element.title = title
-                element.description = description
-                element.tag = tag
+    const response = await axios.post(
+        `${host}/api/notes/addnotes`,
+        {title,description,tag},
+        {
+            headers:{
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"
             }
         }
-
-    }
-
-
-    return(
-        <NoteContext.Provider value = {{notes,addNote,deleteNote,editNote}}>
-            {props.children} 
-        </NoteContext.Provider>
     )
 
+    setnotes(notes.concat(response.data))
 }
+
+
+// Delete a Note
+const deleteNote = async (id)=>{
+
+    await axios.delete(`${host}/api/notes/deletenotes/${id}`,{
+        headers:{
+            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"
+        }
+    })
+
+    const newNotes = notes.filter((note)=>note._id !== id)
+    setnotes(newNotes)
+}
+
+
+// Edit a Note
+const editNote = async (id,title,description,tag)=>{
+    
+    await axios.put(
+        `${host}/api/notes/updatenotes/${id}`,
+        {title,description,tag},
+        {
+            headers:{
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"
+            }
+        }
+    )
+    // Update UI 
+    // let newtitle = prompt("Title")
+    // let newdescription = propmt("description")
+    const newNotes = JSON.parse(JSON.stringify(notes))
+    
+    for(let index = 0; index < newNotes.length; index++){
+        
+        if(newNotes[index]._id === id){
+            
+            newNotes[index].title = title
+            newNotes[index].description = description
+            newNotes[index].tag = tag
+            console.log("working")
+            
+            break
+        }
+    }
+
+    setnotes(newNotes)
+}
+
+
+return(
+    <NoteContext.Provider value={{notes,addNote,deleteNote,editNote,getNotes}}>
+        {props.children}
+    </NoteContext.Provider>
+)
+
+}
+
 export default NoteState

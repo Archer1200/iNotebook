@@ -16,7 +16,7 @@ const AddNote = () => {
 
 
   const onChange=(e)=>{
-    setNote({...note,[e.target.name]:[e.target.value]})
+    setNote({...note,[e.target.name]:e.target.value})
   }
 
   return (
