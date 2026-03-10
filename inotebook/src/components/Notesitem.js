@@ -1,7 +1,14 @@
-import React from 'react'
-
+import noteContext from "../context/noteContext";
+import  { useContext } from "react";
 const Notesitem = (props) => {
+    const context = useContext(noteContext);
+    const {deleteNote} = context
     const {note} = props
+
+
+
+
+
   return (
     
     <div className="col-md-3">
@@ -12,7 +19,7 @@ const Notesitem = (props) => {
         <h5 className="card-title">{note.title}</h5>
         <p className="card-text">{note.description}</p>
         <button type="button" class="btn btn-primary mx-1">Edit</button>
-        <button type="button" class="btn btn-primary mx-1">Delete</button>
+        <button type="button" class="btn btn-primary mx-1" onClick={()=>{deleteNote(note._id)}}>Delete</button>
 
     </div>
 </div>

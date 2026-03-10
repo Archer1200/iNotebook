@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import NoteContext from './noteContext'
 
+
     const NoteState = (props)=>{
     const notesInitial =[
         
@@ -80,8 +81,8 @@ import NoteContext from './noteContext'
         const note = {
         "_id": "69ae6ea17340ceddfa1c0e6e7",
         "user": "69a73d053c8981cc51291734",
-        "title": "my title12",
-        "description": "plz wakeup early [Added]",
+        "title": title,
+        "description": description,
         "date": "1773039265254",
         "__v": 0
     }
@@ -89,7 +90,8 @@ import NoteContext from './noteContext'
     }
 
     // Delete a Note
-    const deleteNote = ()=>{
+    const deleteNote = (id)=>{
+        console.log("deleting the note with id" + id )
 
     }
 
