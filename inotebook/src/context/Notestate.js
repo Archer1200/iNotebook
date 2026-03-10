@@ -28,6 +28,46 @@ const NoteState = (props)=>{
         "description": "plz wakeup early",
         "date": "1773039265254",
         "__v": 0
+    },
+    {
+        "_id": "69ae6ea17340ceddfa1c0e2e7",
+        "user": "69a73d053c8981cc51291734",
+        "title": "my title12",
+        "description": "plz wakeup early",
+        "date": "1773039265254",
+        "__v": 0
+    },
+    {
+        "_id": "69ae6ea17340ceddfa1c0e3e7",
+        "user": "69a73d053c8981cc51291734",
+        "title": "my title12",
+        "description": "plz wakeup early",
+        "date": "1773039265254",
+        "__v": 0
+    },
+    {
+        "_id": "69ae6ea17340ceddfa1c0e4e7",
+        "user": "69a73d053c8981cc51291734",
+        "title": "my title12",
+        "description": "plz wakeup early",
+        "date": "1773039265254",
+        "__v": 0
+    },
+    {
+        "_id": "69ae6ea17340ceddfa1c0e5e7",
+        "user": "69a73d053c8981cc51291734",
+        "title": "my title12",
+        "description": "plz wakeup early",
+        "date": "1773039265254",
+        "__v": 0
+    },
+    {
+        "_id": "69ae6ea17340ceddfa1c0e6e7",
+        "user": "69a73d053c8981cc51291734",
+        "title": "my title12",
+        "description": "plz wakeup early",
+        "date": "1773039265254",
+        "__v": 0
     }
 
     ]
