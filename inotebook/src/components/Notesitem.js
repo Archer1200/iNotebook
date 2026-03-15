@@ -3,16 +3,18 @@ import  { useContext } from "react";
 const Notesitem = (props) => {
     const context = useContext(noteContext);
     const {deleteNote,editNote} = context
-    const {note} = props
+    const {note,updatenote} = props
 
-    const handleEdit = () => {
-  const newTitle = prompt("Enter new title", note.title);
-  const newDescription = prompt("Enter new description", note.description);
+//     const handleEdit = () => {
+//   const newTitle = prompt("Enter new title", note.title);
+//   const newDescription = prompt("Enter new description", note.description);
 
-  if(newTitle && newDescription){
-    editNote(note._id, newTitle, newDescription, note.tag);
-  }
-};
+//   if(newTitle && newDescription){
+//     editNote(note._id, newTitle, newDescription, note.tag);
+//   }
+// };
+
+
 
 
 
@@ -26,8 +28,8 @@ const Notesitem = (props) => {
         <div className="card-body">
         <h5 className="card-title">{note.title}</h5>
         <p className="card-text">{note.description}</p>
-        <button type="button" class="btn btn-primary mx-1" onClick={handleEdit}>Edit</button>
-        <button type="button" class="btn btn-primary mx-1" onClick={()=>{deleteNote(note._id)}}>Delete</button>
+        <button type="button" className="btn btn-primary mx-1" onClick={()=>{updatenote(note)}}>Edit</button>
+        <button type="button" className="btn btn-primary mx-1" onClick={()=>{deleteNote(note._id);props.showAlert(" Deleted Successfully","success ")}}>Delete</button>
 
     </div>
 </div>

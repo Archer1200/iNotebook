@@ -1,10 +1,11 @@
+const cors = require("cors");
 const express = require('express')
 const app = express()
 const connectToMongo = require('./db')
 connectToMongo();
 
 app.use(express.json())
-
+app.use(cors());
 
 
 app.use('/api/auth',require('./routes/auth'))

@@ -1,11 +1,12 @@
 import Notes from './Notes'
 import AddNote from './AddNote'
 
-export default function Home() {
+export default function Home(props) {
+    const {showAlert}=props
   return (
     <>
-    <AddNote/>
-    <Notes/>
+    {/* <AddNote/> */}
+    <Notes showAlert={showAlert}/>
     </>
   )
 }

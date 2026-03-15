@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const fetchuser = require("../middleware/fetchuser");
-const Notes = require("../model/Notes");
+const Note = require("../model/Notes");
 const { body, validationResult } = require("express-validator");
 
 //ROUTE 1 : GET ALL NOTES USING: GET "/api/auth/fetchallnotes" Login Required
@@ -24,7 +24,7 @@ router.post(  "/addnotes",  fetchuser,[
   async (req, res) => {
     try {
         const {title, description, tag} = req.body
-        //if there are erroe, retun bad request and the error
+        //if there are error, retun bad request and the error
             const error = validationResult(req)
             if (!error.isEmpty()){
                 return res.status(400).json({error:error.array()})

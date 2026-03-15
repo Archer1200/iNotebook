@@ -14,7 +14,7 @@ const [notes, setnotes] = useState(notesInitial)
 const getNotes = async ()=>{
     const response = await axios.get(`${host}/api/notes/fetchallnotes`,
         {headers:{
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"}
+                    "auth-token": localStorage.getItem('token')}
     })
     setnotes(response.data)
 }
@@ -22,15 +22,12 @@ const getNotes = async ()=>{
 
 // Add a Note
 const addNote = async (title,description,tag)=>{
-    console.log(typeof title, title)
-console.log(typeof description, description)
-
     const response = await axios.post(
         `${host}/api/notes/addnotes`,
         {title,description,tag},
         {
             headers:{
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"
+                "auth-token": localStorage.getItem('token')
             }
         }
     )
@@ -44,7 +41,7 @@ const deleteNote = async (id)=>{
 
     await axios.delete(`${host}/api/notes/deletenotes/${id}`,{
         headers:{
-            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"
+            "auth-token": localStorage.getItem('token')
         }
     })
 
@@ -61,7 +58,7 @@ const editNote = async (id,title,description,tag)=>{
         {title,description,tag},
         {
             headers:{
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhNzNkMDUzYzg5ODFjYzUxMjkxNzM0In0sImlhdCI6MTc3MjU2Nzg0OX0.PlJVWmBpzap_kL7f4SimfVhGKfIW3SGdQSqQpORUzMk"
+                "auth-token": localStorage.getItem('token')
             }
         }
     )
